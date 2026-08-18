@@ -90,6 +90,37 @@ def test_every_analysis_script_compiles():
     assert not failed, "scripts failed to compile:\n  " + "\n  ".join(failed)
 
 
+def test_documented_commands_exist():
+    """Every `python <script>` the docs tell a reader to run must exist."""
+    cmd = re.compile(r"^\s*(?:\$\s*)?python (?!-m )([A-Za-z0-9_./\\-]+\.py)", re.M)
+    offenders = []
+    for doc in sorted(ROOT.rglob("*.md")):
+        if SKIP_DIRS & set(doc.parts):
+            continue
+        text = doc.read_text(encoding="utf-8")
+        # ignore the fenced source dumps -- they are file bodies, not instructions
+        text = re.sub(r"^### `[^`]+`\n.*?^```", "", text, flags=re.S | re.M)
+        for script in set(cmd.findall(text)):
+            if not (ROOT / script.replace("\\", "/")).exists():
+                offenders.append(f"{doc.relative_to(ROOT).as_posix()}: python {script}")
+    assert not offenders, (
+        "documentation tells readers to run scripts that do not exist:\n  "
+        + "\n  ".join(sorted(offenders))
+    )
+
+
+def test_reference_doc_matches_source():
+    """docs/MOSAIC_OMEGA.md embeds file sources; they must equal the real files."""
+    sys.path.insert(0, str(ROOT / "analysis"))
+    import sync_reference_doc
+
+    drift = sync_reference_doc.sync(check_only=True)
+    assert drift == 0, (
+        "docs/MOSAIC_OMEGA.md has drifted from the source (see names above); "
+        "run: python analysis/sync_reference_doc.py"
+    )
+
+
 def test_package_is_importable_without_dependencies():
     """The core package must import using only the standard library."""
     sys.path.insert(0, str(ROOT))

@@ -2,19 +2,29 @@
 
 *A self-reconfiguring agentic architecture with fail-safe loop engineering.*
 
-Python ≥ 3.9 · zero third-party dependencies · 24/24 tests passing · bit-for-bit deterministic · every number in this document produced by running the code.
+Python ≥ 3.9 · the core package has zero third-party dependencies · 24/24 tests passing · bit-for-bit deterministic · every number in this document produced by running the code.
+
+> **Scope of this document.** This is a literate reference for the **core architecture
+> package only** — `mosaic_omega/` and `tests/`, which are pure standard library. It is
+> *not* a description of the whole repository. The single-cell periodontitis pipeline in
+> `analysis/` is a separate layer that does need third-party packages (scanpy, numpy,
+> pandas, …); see the top-level [`README.md`](../README.md) and
+> [`requirements.txt`](../requirements.txt) for that. Where this document and the
+> repository disagree about a path, **the repository is correct**.
 
 ---
 
 ## 1. How to use this file in VS Code
 
 Every fenced block below is the exact source of one file, dumped from the working
-package. Recreate the tree and paste each block into its file — or run the
-extractor in §3.
+package. To read the architecture, open the files in this repository. To lift the
+architecture out as a standalone project, run the extractor in §3.
 
-```
-mosaic-omega/
-├── mosaic_omega/
+**Where these files live in this repository:**
+
+```text
+mosaic-omega-periodontitis/
+├── mosaic_omega/               ← the architecture (pure standard library)
 │   ├── __init__.py        rng.py            config.py        types.py
 │   ├── problem.py         llm.py            memory.py        governance.py
 │   ├── agents.py          kernel.py         topology.py      routing.py
@@ -22,20 +32,32 @@ mosaic-omega/
 │   ├── metrics.py         orchestrator.py   benchmark.py     cli.py
 ├── tests/
 │   ├── __init__.py
-│   └── test_mosaic_omega.py
-├── run_demo.py
-├── requirements.txt
+│   ├── test_mosaic_omega.py    ← architecture suite (24 tests)
+│   └── test_reproducibility.py ← reproducibility guards (5 tests)
+├── analysis/
+│   ├── _paths.py               ← repo-relative path resolver
+│   ├── run_demo.py             ← the demo (NOT at the repository root)
+│   └── …                       ← periodontitis pipeline
+├── requirements.txt            ← analysis dependencies (NOT empty)
 └── README.md
 ```
 
+Run these **from the repository root**:
+
 ```bash
-python run_demo.py                  # single run + 9-group metric report + ablations
+python analysis/run_demo.py         # single run + 9-group metric report + ablations
 python tests/test_mosaic_omega.py   # 24 tests, no pytest needed
+python tests/test_reproducibility.py
 python -m mosaic_omega.cli --report
 ```
 
-Recommended VS Code extensions: Python, Pylance. No `pip install` step —
-`requirements.txt` is deliberately empty.
+All four work straight from a clone with **no `pip install` step**, because the core
+package is standard-library-only and `analysis/_paths.py` puts the repository root on
+`sys.path`. Installing (`pip install -e .`) is only needed to `import mosaic_omega`
+from outside the repository; `pip install -r requirements.txt` is needed only for the
+`analysis/` single-cell pipeline.
+
+Recommended VS Code extensions: Python, Pylance.
 
 ---
 
@@ -142,7 +164,14 @@ for path, body in pattern.findall(md):
     print("wrote", target)
 ```
 
-Then `cd mosaic-omega && python run_demo.py`.
+Each `### \`path\`` heading is repository-relative, so the extractor reproduces this
+repository's layout — `mosaic_omega/…`, `tests/…`, `analysis/run_demo.py`. Then
+`cd mosaic-omega && python analysis/run_demo.py`.
+
+> **These blocks are generated from the repository, not maintained by hand.**
+> `python analysis/sync_reference_doc.py` rewrites every block from the file it names,
+> and `tests/test_reproducibility.py` fails if any block drifts out of sync. If this
+> document and the source ever disagree, the source is correct.
 
 ---
 
@@ -254,7 +283,7 @@ best-agent-for-this-constraint; the router never sees it.
 
 ## 5. Measured results
 
-All figures below come from executing `run_demo.py` on this exact source. The
+All figures below come from executing `analysis/run_demo.py` on this exact source. The
 benchmark problem is `SyntheticConstraintProblem`, which carries ground truth
 that the architecture's own scorers never see.
 
@@ -699,7 +728,7 @@ applies, but comparisons need more seeds.
 - [`mosaic_omega/cli.py`](#mosaicomegaclipy)
 - [`tests/__init__.py`](#testsinitpy)
 - [`tests/test_mosaic_omega.py`](#teststestmosaicomegapy)
-- [`run_demo.py`](#rundemopy)
+- [`analysis/run_demo.py`](#rundemopy)
 - [`requirements.txt`](#requirementstxt)
 
 
@@ -732,6 +761,7 @@ from .config import MosaicConfig
 from .failsafe import (
     BudgetManager, CheckpointStore, IdempotencyLedger, LoopGuards, RecoveryManager,
 )
+from .freeenergy import FreeEnergyParams, StructuralFreeEnergy
 from .governance import BlindingFilter, BlindingPolicy, ContractLedger
 from .kernel import AgentPruner, DynamicAgentProvisioner, MissionKernel
 from .llm import AnthropicBackend, LLMBackend, NullBackend
@@ -757,6 +787,7 @@ __all__ = [
     "UniverseState", "BlindingFilter", "BlindingPolicy", "ContractLedger",
     "FalsificationEngine", "ContradictionScanner", "MinorityPreserver",
     "BlindedJury", "MemoryFabric", "FailSafeLoop", "LoopOutcome",
+    "StructuralFreeEnergy", "FreeEnergyParams",
     "CheckpointStore", "LoopGuards", "RecoveryManager", "BudgetManager",
     "IdempotencyLedger", "BaseAgent", "SpecialistAgent", "MicroAgent",
     "VerifierAgent", "FalsifierAgent", "ContradictionAgent",
@@ -872,11 +903,15 @@ class MosaicConfig:
     )
 
     # --- topology ----------------------------------------------------------
-    edge_learning_rate: float = 0.35
+    edge_learning_rate: float = 0.35      # gradient-descent step size eta on J
     edge_prune_threshold: float = 0.18
     max_degree: int = 6
     topology_add_top_k: int = 2
     contamination_penalty: float = 0.45
+
+    # --- free-energy structural control (FESC) -----------------------------
+    fe_kappa: float = 1.0                 # wiring cost; kappa=1 => legacy update
+    fe_lambda_U: float = 0.15             # price of residual belief uncertainty
 
     # --- universes ---------------------------------------------------------
     n_universes: int = 3
@@ -2750,6 +2785,13 @@ Implements the governing state equation
 
 where E_t is the evidence/event signal, C_t the competence vector, F_t the
 failure signal and U_t the uncertainty signal.
+
+Under Free-Energy Structural Control (see ``freeenergy.py``) ``F`` is no longer a
+hand-tuned score: each edge target is the closed-form minimiser
+``w* = clip(g/kappa, 0, 1)`` of the convex structural free energy ``J``, and the
+learning-rate update is a provably convergent coordinate gradient step toward it.
+``rewire`` also reports the free energy still recoverable next iteration, which
+the loop consumes as a *derived* value-of-information estimate.
 """
 from __future__ import annotations
 
@@ -2759,6 +2801,7 @@ from dataclasses import dataclass, field
 from typing import Dict, Iterable, List, Optional, Set, Tuple
 
 from .config import MosaicConfig
+from .freeenergy import FreeEnergyParams, StructuralFreeEnergy
 from .types import AgentRuntime, SovereigntyTransfer, StageSpec, TopologySnapshot
 
 
@@ -2773,6 +2816,20 @@ class TopologyGraph:
         self.handoffs: Dict[str, Set[str]] = {}             # directed delegation edges
         self.co_success: Dict[Tuple[str, str], float] = {}
         self.contamination: Dict[Tuple[str, str], float] = {}
+        # The convex objective whose minimiser defines every edge target.
+        self.fe = StructuralFreeEnergy(FreeEnergyParams(
+            kappa=config.fe_kappa,
+            w_complement=0.35,
+            w_competence=0.30,
+            w_evidence=0.20,
+            w_uncertainty=0.15,
+            w_failure=0.30,
+            contamination_penalty=config.contamination_penalty,
+            lambda_U=config.fe_lambda_U,
+        ))
+        # Free energy the *next* rewire can still shed; the loop reads this as
+        # the derived value-of-information for the continue/stop decision.
+        self.predicted_descent: float = 0.0
 
     # -- basic ops ----------------------------------------------------------
     @staticmethod
@@ -2906,6 +2963,17 @@ class TopologyGraph:
                 drop = nbrs.pop(0)
                 self.weights.pop(self.key(node, drop), None)
 
+        # Derived value-of-information: free energy still recoverable by moving
+        # every active pair to its optimum next iteration (EVOI = predicted J descent).
+        descent = 0.0
+        for i, a in enumerate(active):
+            for b in active[i + 1:]:
+                g = self._gain(a, b, capabilities, competence, failure,
+                               uncertainty, evidence)
+                w = self.weights.get(self.key(a, b), 0.0)
+                descent += self.fe.edge_descent(w, g)
+        self.predicted_descent = self.fe.predicted_descent([], uncertainty) + descent
+
         after = set(self.weights.keys())
         return TopologySnapshot(
             iteration=iteration,
@@ -2919,6 +2987,26 @@ class TopologyGraph:
             avg_path_length=self.avg_path_length(),
         )
 
+    def _gain(
+        self,
+        a: str,
+        b: str,
+        capabilities: Dict[str, Set[str]],
+        competence: Dict[str, float],
+        failure: Dict[str, float],
+        uncertainty: float,
+        evidence: Dict[Tuple[str, str], float],
+    ) -> float:
+        """Expected epistemic gain ``g_ab`` of the edge (the ``-g w`` term of J)."""
+        ca, cb = capabilities.get(a, set()), capabilities.get(b, set())
+        union = ca | cb
+        complement = len(union - (ca & cb)) / len(union) if union else 0.0
+        comp = 0.5 * (competence.get(a, 0.5) + competence.get(b, 0.5))
+        fail = 0.5 * (failure.get(a, 0.0) + failure.get(b, 0.0))
+        ev = evidence.get(self.key(a, b), 0.0)
+        contam = self.contamination.get(self.key(a, b), 0.0)
+        return self.fe.edge_gain(complement, comp, ev, fail, uncertainty, contam)
+
     def _affinity(
         self,
         a: str,
@@ -2929,22 +3017,9 @@ class TopologyGraph:
         uncertainty: float,
         evidence: Dict[Tuple[str, str], float],
     ) -> float:
-        ca, cb = capabilities.get(a, set()), capabilities.get(b, set())
-        union = ca | cb
-        complement = len(union - (ca & cb)) / len(union) if union else 0.0
-        comp = 0.5 * (competence.get(a, 0.5) + competence.get(b, 0.5))
-        fail = 0.5 * (failure.get(a, 0.0) + failure.get(b, 0.0))
-        ev = evidence.get(self.key(a, b), 0.0)
-        contam = self.contamination.get(self.key(a, b), 0.0)
-        raw = (
-            0.35 * complement
-            + 0.30 * comp
-            + 0.20 * ev
-            + 0.15 * uncertainty          # more uncertainty -> denser exploration
-            - 0.30 * fail
-            - self.config.contamination_penalty * contam
-        )
-        return max(0.0, min(1.0, raw))
+        """Edge target = convex-optimal weight ``w* = clip(g/kappa, 0, 1)``."""
+        g = self._gain(a, b, capabilities, competence, failure, uncertainty, evidence)
+        return self.fe.optimal_weight(g)
 
     # -- structural metrics -------------------------------------------------
     def degree_entropy(self) -> float:
@@ -4640,6 +4715,9 @@ class FailSafeLoop:
         self.trace.evoi_realized.append(realized)
         self.ema_gain = 0.6 * self.ema_gain + 0.4 * max(0.0, realized)
 
+        # Value of another iteration = free energy the next rewire can still shed
+        # (a *derived* quantity in the units of J), net of its compute/risk cost.
+        # See freeenergy.py: EVOI_t = sum (g - kappa*w)^2 / (2 kappa) + lambda_U*U.
         headroom = max(0.0, self.mission.acceptance_threshold - current)
         est_tokens = self.budgets.tokens_used / max(1, self.iteration + 1)
         est_time = self.budgets.elapsed() / max(1, self.iteration + 1)
@@ -4648,8 +4726,9 @@ class FailSafeLoop:
             + (1.0 - (winner.falsification_survival if winner else 0.0))
             + 0.2 * self.recovery.consecutive_failures
         )
+        descent = self.topology.predicted_descent
         evoi = (
-            self.cfg.evoi_quality_weight * self.ema_gain * (0.25 + headroom)
+            self.cfg.evoi_quality_weight * descent * (0.25 + headroom)
             - self.cfg.token_cost_per_unit * est_tokens
             - self.cfg.time_cost_per_second * est_time
             - self.cfg.evoi_risk_weight * risk * 0.1
@@ -5604,7 +5683,7 @@ if __name__ == "__main__":
 Empty — makes `tests` a package.
 
 ```python
-# (intentionally empty)
+
 ```
 
 
@@ -5632,6 +5711,7 @@ from mosaic_omega import (
     SyntheticConstraintProblem, Termination, TopologyGraph, UniverseManager,
     build_agent,
 )
+from mosaic_omega import FreeEnergyParams, StructuralFreeEnergy
 from mosaic_omega.metrics import auroc, brier_score, expected_calibration_error, gini
 from mosaic_omega.types import RiskLevel
 
@@ -5916,6 +5996,35 @@ def test_universes_are_isolated():
     assert mgr.isolation_violations() and mgr.isolation_purity() < 1.0
 
 
+# --- Free-Energy Structural Control ----------------------------------------
+def test_free_energy_closed_form_optimum_and_monotone_descent():
+    fe = StructuralFreeEnergy(FreeEnergyParams(kappa=1.4, lambda_U=0.0))
+    g = fe.edge_gain(complement=0.8, competence=0.7, evidence=0.3,
+                     failure=0.1, uncertainty=0.5, contamination=0.0)
+    w_star = fe.optimal_weight(g)
+
+    # 1. w* is the unique minimiser: any admissible perturbation raises J.
+    j_star = fe.edge_energy(w_star, g)
+    for dw in (-0.2, -0.05, 0.05, 0.2):
+        w = min(1.0, max(0.0, w_star + dw))
+        if w != w_star:
+            assert fe.edge_energy(w, g) >= j_star - 1e-12
+
+    # 2. descent is exactly J(w) - J(w*), and never negative.
+    w0 = 0.0
+    assert fe.edge_descent(w0, g) >= 0.0
+    assert abs(fe.edge_descent(w0, g) - (fe.edge_energy(w0, g) - j_star)) < 1e-9
+
+    # 3. gradient descent w <- w - eta*(kappa*w - g) converges monotonically to w*.
+    eta, w, prev = 0.35, w0, fe.edge_energy(w0, g)
+    for _ in range(200):
+        w = min(1.0, max(0.0, w - eta * (fe.p.kappa * w - g)))
+        cur = fe.edge_energy(w, g)
+        assert cur <= prev + 1e-12          # J never increases
+        prev = cur
+    assert abs(w - w_star) < 1e-6           # reaches the closed-form optimum
+
+
 # --- Metric primitives -----------------------------------------------------
 def test_metric_primitives():
     assert auroc([(0.9, True), (0.1, False)]) == 1.0
@@ -5984,9 +6093,10 @@ if __name__ == "__main__":
 
 <a id="rundemopy"></a>
 
-### `run_demo.py`
+### `analysis/run_demo.py`
 
 Single run, full metric report, ablation suite, comparison table.
+Run it as `python analysis/run_demo.py` from the repository root.
 
 ```python
 #!/usr/bin/env python3
@@ -5994,9 +6104,8 @@ Single run, full metric report, ablation suite, comparison table.
 from __future__ import annotations
 
 import sys
-from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+import _paths  # noqa: F401  -- puts the repository root on sys.path
 
 from mosaic_omega import MetricsEngine, MosaicConfig, MosaicOmega, SyntheticConstraintProblem
 from mosaic_omega.benchmark import ablation_suite, comparison_table
@@ -6060,15 +6169,25 @@ if __name__ == "__main__":
 
 ### `requirements.txt`
 
-Empty on purpose — standard library only.
+Dependencies of the `analysis/` single-cell pipeline. The core `mosaic_omega`
+package needs **none** of these — it is standard-library-only, which is why
+`python tests/test_mosaic_omega.py` and `python -m mosaic_omega.cli --report` run
+on a bare interpreter.
 
 ```text
-# MOSAIC-Omega has no third-party runtime dependencies.
-# Python >= 3.9 (developed and tested on 3.12).
-#
-# Optional, only if you attach a real model backend:
-#   (none - AnthropicBackend uses urllib from the standard library)
-#
-# Optional, for running the test suite with pytest instead of the built-in runner:
-# pytest>=7.0
+# Core mosaic_omega package: pure standard library, no dependencies.
+# The single-cell analysis scripts in analysis/ require:
+numpy
+pandas
+scipy
+scikit-learn
+scanpy
+anndata
+leidenalg
+igraph
+umap-learn
+matplotlib
+networkx
+h5py
+requests
 ```

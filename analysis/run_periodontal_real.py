@@ -20,6 +20,8 @@ import json
 import os
 from typing import Dict, List
 
+import _paths  # noqa: F401  -- puts the repository root on sys.path
+
 from mosaic_omega import MetricsEngine, MosaicConfig, MosaicOmega
 from mosaic_omega.problem import Problem, _Constraint
 from mosaic_omega.rng import rng_for

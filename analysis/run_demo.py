@@ -3,9 +3,8 @@
 from __future__ import annotations
 
 import sys
-from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+import _paths  # noqa: F401  -- puts the repository root on sys.path
 
 from mosaic_omega import MetricsEngine, MosaicConfig, MosaicOmega, SyntheticConstraintProblem
 from mosaic_omega.benchmark import ablation_suite, comparison_table

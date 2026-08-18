@@ -25,7 +25,7 @@ analysis.
 
 ```text
 mosaic_omega/     Core architecture (pure standard library, no dependencies)
-tests/            Architecture suite (24 tests) + reproducibility guards (5 tests)
+tests/            Architecture suite (24 tests) + reproducibility guards (7 tests)
 analysis/         Single-cell periodontitis pipeline
 figures/          Generated figures (active set + superseded_overfit/ archive)
 tables/           Generated result tables (CSV)
@@ -50,7 +50,7 @@ single-cell analysis in `analysis/` needs the packages in `requirements.txt`.
 
 ```bash
 python tests/test_mosaic_omega.py      # architecture suite      -> 24/24 passed
-python tests/test_reproducibility.py   # reproducibility guards  ->   5/5 passed
+python tests/test_reproducibility.py   # reproducibility guards  ->   7/7 passed
 ```
 
 For the single-cell analysis, download the data (see [`data/README.md`](data/README.md)),
@@ -73,9 +73,12 @@ TABLES  = ROOT / "tables"
 ```
 
 so the pipeline runs identically regardless of machine, username, or operating
-system. `tests/test_reproducibility.py` enforces this: it fails if any script
+system. `tests/test_reproducibility.py` enforces this — it fails if any script
 reintroduces a machine-specific absolute path, if the resolved paths drift from the
-repository root, or if a script stops parsing.
+repository root, if a script stops parsing, if the documentation tells a reader to
+run a script that does not exist, or if the source blocks embedded in
+[`docs/MOSAIC_OMEGA.md`](docs/MOSAIC_OMEGA.md) drift from the real files
+(`python analysis/sync_reference_doc.py` regenerates them).
 
 The single-cell matrices are several GB and are not committed. To keep `data/` on
 another disk, point `MOSAIC_ROOT` at a directory laid out like the repository:

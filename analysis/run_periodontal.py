@@ -17,6 +17,8 @@ from __future__ import annotations
 
 from typing import Dict, List
 
+import _paths  # noqa: F401  -- puts the repository root on sys.path
+
 from mosaic_omega import MetricsEngine, MosaicConfig, MosaicOmega
 from mosaic_omega.problem import Problem, _Constraint
 from mosaic_omega.types import RiskLevel, StageSpec
