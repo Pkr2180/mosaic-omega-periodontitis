@@ -1,0 +1,10 @@
+,value
+abundance_concordance_pearson_r,-0.488
+mean_DE_spearman,-0.019
+mean_replication_rate,0.498
+mean_direction_concordance,0.554
+pooled_effect_direction_AUROC,0.525
+pan_signature_genes_replicated,22.0
+pan_signature_total,30.0
+mosaic_biomarkers_replicated,3.0
+mosaic_biomarkers_testable,3.0

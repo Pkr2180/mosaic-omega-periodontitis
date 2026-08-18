@@ -1,0 +1,11 @@
+cell_type,mosaic_pick,mosaic_robustness,naive_pick,naive_robustness
+B cell,ACTG1,1.0,RPL37A,0.5555555555555556
+Dendritic cell,HLA-DRB6,1.0,HLA-DRB6,1.0
+Endothelial,COL4A1,1.0,COL4A1,1.0
+Fibroblast,CALD1,1.0,CALD1,1.0
+Mast cell,CD52,1.0,CLU,1.0
+NK cell,IGKC,1.0,IGKC,1.0
+Neutrophil,SERPINA1,0.7777777777777778,CD55,0.1111111111111111
+Plasma cell,HLA-B,0.4444444444444444,HLA-B,0.4444444444444444
+T cell (CD4),IGKC,1.0,IGKC,1.0
+T cell (CD8),IGKC,1.0,IGKC,1.0

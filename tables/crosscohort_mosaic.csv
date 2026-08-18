@@ -1,0 +1,11 @@
+cell_type,mosaic_biomarker,ext_robustness,replicates_ext
+B_cell,ACTG1,,False
+NK_cell,IGKC,1.0,True
+Plasma_cell,HLA-B,,False
+T_cell_CD4,IGKC,1.0,True
+T_cell_CD8,IGKC,0.8235294117647058,True
+Dendritic_cell,HLA-DRB6,,False
+Mast_cell,CD52,,False
+Neutrophil,SERPINA1,,False
+Endothelial,COL4A1,,False
+Fibroblast,CALD1,,False

@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mosaic-omega"
+version = "1.0.0"
+description = "Self-auditing, free-energy-governed multi-agent architecture, with an application to single-cell periodontitis analysis"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+
+# The core mosaic_omega package is pure standard library (no runtime deps).
+# The single-cell analysis in analysis/ needs the packages in requirements.txt.
+dependencies = []
+
+[tool.setuptools]
+packages = ["mosaic_omega"]

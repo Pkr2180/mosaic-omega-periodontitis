@@ -1,0 +1,107 @@
+{
+ "mosaic_accuracy_mean": 0.6166666666666667,
+ "mosaic_mean_robustness": 1.0,
+ "naive_mean_robustness": 0.9852941176470589,
+ "committed": {
+  "B_cell": "IGHG4",
+  "NK_cell": "JUND",
+  "Plasma_cell": "BTG2",
+  "T_cell_CD4": "IGKC",
+  "T_cell_CD8": "JUND",
+  "Endothelial": "JUND",
+  "Epithelial": "S100A6",
+  "Fibroblast": "IER3",
+  "Pericyte_Mural": "IGKC",
+  "Macrophage": "IGKC",
+  "Mast_cell": "VIM",
+  "Neutrophil": "NAMPT"
+ },
+ "naive": {
+  "B_cell": "IGHG4",
+  "Endothelial": "JUND",
+  "Epithelial": "S100A6",
+  "Fibroblast": "JUND",
+  "Macrophage": "IGKC",
+  "Mast_cell": "JUND",
+  "NK_cell": "JUND",
+  "Neutrophil": "TNFAIP3",
+  "Pericyte_Mural": "JUND",
+  "Plasma_cell": "JUND",
+  "T_cell_CD4": "IGKC",
+  "T_cell_CD8": "IGKC"
+ },
+ "picks": {
+  "B cell": {
+   "mosaic": "IGHG4",
+   "mosaic_rob": 1.0,
+   "naive": "IGHG4",
+   "naive_rob": 1.0
+  },
+  "Endothelial": {
+   "mosaic": "JUND",
+   "mosaic_rob": 1.0,
+   "naive": "JUND",
+   "naive_rob": 1.0
+  },
+  "Epithelial": {
+   "mosaic": "S100A6",
+   "mosaic_rob": 1.0,
+   "naive": "S100A6",
+   "naive_rob": 1.0
+  },
+  "Fibroblast": {
+   "mosaic": "IER3",
+   "mosaic_rob": 1.0,
+   "naive": "JUND",
+   "naive_rob": 1.0
+  },
+  "Macrophage": {
+   "mosaic": "IGKC",
+   "mosaic_rob": 1.0,
+   "naive": "IGKC",
+   "naive_rob": 1.0
+  },
+  "Mast cell": {
+   "mosaic": "VIM",
+   "mosaic_rob": 1.0,
+   "naive": "JUND",
+   "naive_rob": 1.0
+  },
+  "NK cell": {
+   "mosaic": "JUND",
+   "mosaic_rob": 1.0,
+   "naive": "JUND",
+   "naive_rob": 1.0
+  },
+  "Neutrophil": {
+   "mosaic": "NAMPT",
+   "mosaic_rob": 1.0,
+   "naive": "TNFAIP3",
+   "naive_rob": 1.0
+  },
+  "Pericyte/Mural": {
+   "mosaic": "IGKC",
+   "mosaic_rob": 1.0,
+   "naive": "JUND",
+   "naive_rob": 1.0
+  },
+  "Plasma cell": {
+   "mosaic": "BTG2",
+   "mosaic_rob": 1.0,
+   "naive": "JUND",
+   "naive_rob": 1.0
+  },
+  "T cell (CD4)": {
+   "mosaic": "IGKC",
+   "mosaic_rob": 1.0,
+   "naive": "IGKC",
+   "naive_rob": 1.0
+  },
+  "T cell (CD8)": {
+   "mosaic": "JUND",
+   "mosaic_rob": 1.0,
+   "naive": "IGKC",
+   "naive_rob": 0.8235294117647058
+  }
+ }
+}

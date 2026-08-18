@@ -1,0 +1,5 @@
+cohort,method,mean_robustness,robust_recovery
+main,naive_Wilcoxon,0.8111111111111111,0.875
+main,MOSAIC-Omega,0.9222222222222222,1.0
+ext,naive_Wilcoxon,0.9852941176470589,1.0
+ext,MOSAIC-Omega,1.0,1.0

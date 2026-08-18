@@ -1,0 +1,30 @@
+{
+ "mosaic_accuracy_mean": 0.8,
+ "mosaic_accuracy_std": 0.0,
+ "mosaic_mean_robustness": 0.9222222222222222,
+ "naive_mean_robustness": 0.8111111111111111,
+ "committed": {
+  "B_cell": "ACTG1",
+  "NK_cell": "IGKC",
+  "Plasma_cell": "HLA-B",
+  "T_cell_CD4": "IGKC",
+  "T_cell_CD8": "IGKC",
+  "Dendritic_cell": "HLA-DRB6",
+  "Mast_cell": "CD52",
+  "Neutrophil": "SERPINA1",
+  "Endothelial": "COL4A1",
+  "Fibroblast": "CALD1"
+ },
+ "naive": {
+  "B_cell": "RPL37A",
+  "Dendritic_cell": "HLA-DRB6",
+  "Endothelial": "COL4A1",
+  "Fibroblast": "CALD1",
+  "Mast_cell": "CLU",
+  "NK_cell": "IGKC",
+  "Neutrophil": "CD55",
+  "Plasma_cell": "HLA-B",
+  "T_cell_CD4": "IGKC",
+  "T_cell_CD8": "IGKC"
+ }
+}

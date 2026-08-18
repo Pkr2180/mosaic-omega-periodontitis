@@ -1,0 +1,9 @@
+cell_type,train_marker(Williams),committed,correct,indep_test_rank,n_test_cells,replicates(indep)
+CD8_T,CCL5,CCL5,True,0,1340,True
+CD4_T,IL7R,IL7R,True,0,869,True
+B_cell,MS4A1,MS4A1,True,0,212,True
+plasma_cell,JCHAIN,JCHAIN,True,-1,12,False
+mast_cell,TPSAB1,TPSAB1,True,1,493,True
+dendritic_cell,HLA-DPB1,HLA-DPB1,True,2,180,True
+macrophage,FTL,FTL,True,1,148,True
+neutrophil,IL1B,IL1B,True,8,66,True

@@ -1,0 +1,8 @@
+,B cell,Dendritic cell,Endothelial,Epithelial,Fibroblast,Mast cell,NK cell,Neutrophil,Plasma cell,T cell (CD4),T cell (CD8)
+Humoral / Ig (plasma B),0.0,0.0,2.0,0.0,0.0,1.0,5.0,0.0,1.0,6.0,7.0
+Antigen presentation (MHC-II),2.0,2.0,0.0,0.0,0.0,1.0,6.0,0.0,0.0,2.0,3.0
+MHC-I / interferon,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0,0.0,0.0
+ECM / collagen remodeling,0.0,2.0,4.0,0.0,16.0,1.0,1.0,0.0,1.0,1.0,0.0
+Endothelial activation / adhesion,0.0,1.0,2.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0
+Complement / neutrophil / innate,0.0,5.0,0.0,0.0,0.0,1.0,3.0,2.0,0.0,0.0,0.0
+Chemokine / TLS,0.0,0.0,1.0,0.0,2.0,0.0,2.0,0.0,0.0,1.0,1.0

@@ -1,0 +1,29 @@
+# ---- Large data: download separately, see data/README.md ----
+data/*.h5ad
+data/*.tar
+data/*.tsv.gz
+data/*.txt.gz
+data/*.mtx
+data/GSE164241/
+data/GSE171213/
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+
+# ---- Manuscript Word files (intentionally not part of this repository) ----
+*.docx
+
+# ---- Archives / scratch ----
+*.zip
+*.tmp
+
+# ---- OS / editor ----
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,53 @@
+{
+ "B cell": [],
+ "Dendritic cell": [],
+ "Epithelial": [
+  "AC019129.1",
+  "AC107075.1",
+  "ACADSB",
+  "AGO3",
+  "AL078581.1",
+  "BNIP1",
+  "C11orf49",
+  "C9orf40",
+  "CDCA4",
+  "FAN1",
+  "FBXO42",
+  "GLE1",
+  "HSPA4L",
+  "IL17RD",
+  "INTS9",
+  "IQANK1",
+  "KCTD15",
+  "KRT6B",
+  "LYRM7",
+  "MEA1",
+  "MIS12",
+  "MRPL58",
+  "NOL9",
+  "RFC4",
+  "SAMM50",
+  "SNUPN",
+  "ST13P4",
+  "TINCR",
+  "TMA7",
+  "TTC26",
+  "TUBGCP3",
+  "TXNL4B",
+  "ZBED4",
+  "ZBTB14",
+  "ZHX3",
+  "ZNF573"
+ ],
+ "Fibroblast": [],
+ "Mast cell": [
+  "SYNGAP1"
+ ],
+ "NK cell": [
+  "ZBTB16"
+ ],
+ "Neutrophil": [],
+ "Plasma cell": [],
+ "T cell (CD4)": [],
+ "T cell (CD8)": []
+}

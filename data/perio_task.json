@@ -1,0 +1,449 @@
+{
+  "provenance": {
+    "primary": "CZ CELLxGENE Human Oral & Craniofacial Cell Atlas - Mucosal Immune Atlas (gingiva subset)",
+    "validation": "CZ CELLxGENE Human Oral & Craniofacial Cell Atlas - Mucosal Atlas (gingiva subset)",
+    "n_primary_gingiva": 14036,
+    "n_valid_gingiva": 15228,
+    "common_genes": 35377,
+    "topk_val": 25,
+    "seed": 20260807
+  },
+  "types": [
+    "CD8-positive, alpha-beta T cell",
+    "CD4-positive helper T cell",
+    "B cell",
+    "plasma cell",
+    "mast cell",
+    "dendritic cell",
+    "macrophage",
+    "neutrophil"
+  ],
+  "short": {
+    "CD8-positive, alpha-beta T cell": "CD8_T",
+    "CD4-positive helper T cell": "CD4_T",
+    "B cell": "B_cell",
+    "plasma cell": "plasma_cell",
+    "mast cell": "mast_cell",
+    "dendritic cell": "dendritic_cell",
+    "macrophage": "macrophage",
+    "neutrophil": "neutrophil"
+  },
+  "truth": {
+    "CD8-positive, alpha-beta T cell": "CCL5",
+    "CD4-positive helper T cell": "IL7R",
+    "B cell": "MS4A1",
+    "plasma cell": "JCHAIN",
+    "mast cell": "TPSAB1",
+    "dendritic cell": "HLA-DPB1",
+    "macrophage": "FTL",
+    "neutrophil": "IL1B"
+  },
+  "candidates": {
+    "CD8-positive, alpha-beta T cell": [
+      "FTL",
+      "TPSAB1",
+      "CCL5",
+      "HLA-DPB1"
+    ],
+    "CD4-positive helper T cell": [
+      "JCHAIN",
+      "IL7R",
+      "CCL5",
+      "MS4A1"
+    ],
+    "B cell": [
+      "CCL5",
+      "MS4A1",
+      "IL7R",
+      "JCHAIN"
+    ],
+    "plasma cell": [
+      "MS4A1",
+      "HLA-DPB1",
+      "JCHAIN",
+      "TPSAB1"
+    ],
+    "mast cell": [
+      "MS4A1",
+      "CCL5",
+      "JCHAIN",
+      "TPSAB1"
+    ],
+    "dendritic cell": [
+      "HLA-DPB1",
+      "IL1B",
+      "TPSAB1",
+      "CCL5"
+    ],
+    "macrophage": [
+      "IL7R",
+      "HLA-DPB1",
+      "CCL5",
+      "FTL"
+    ],
+    "neutrophil": [
+      "MS4A1",
+      "IL1B",
+      "JCHAIN",
+      "CCL5"
+    ]
+  },
+  "train_score": {
+    "CD8-positive, alpha-beta T cell": {
+      "FTL": -43.76890563964844,
+      "TPSAB1": -18.57648468017578,
+      "CCL5": 78.3340072631836,
+      "HLA-DPB1": -14.031225204467773
+    },
+    "CD4-positive helper T cell": {
+      "JCHAIN": -5.240931034088135,
+      "IL7R": 48.99728012084961,
+      "CCL5": -14.194523811340332,
+      "MS4A1": -12.820260047912598
+    },
+    "B cell": {
+      "CCL5": -23.395214080810547,
+      "MS4A1": 53.122859954833984,
+      "IL7R": -19.72343635559082,
+      "JCHAIN": 6.901765823364258
+    },
+    "plasma cell": {
+      "MS4A1": -3.168722152709961,
+      "HLA-DPB1": 12.329828262329102,
+      "JCHAIN": 26.59853744506836,
+      "TPSAB1": -3.704211711883545
+    },
+    "mast cell": {
+      "MS4A1": -9.01887035369873,
+      "CCL5": -29.915279388427734,
+      "JCHAIN": -2.8308582305908203,
+      "TPSAB1": 69.79405975341797
+    },
+    "dendritic cell": {
+      "HLA-DPB1": 47.454097747802734,
+      "IL1B": 15.514039039611816,
+      "TPSAB1": -7.055624961853027,
+      "CCL5": -18.855485916137695
+    },
+    "macrophage": {
+      "IL7R": -0.6338769197463989,
+      "HLA-DPB1": 38.502506256103516,
+      "CCL5": -18.692514419555664,
+      "FTL": 48.37022018432617
+    },
+    "neutrophil": {
+      "MS4A1": -3.0177488327026367,
+      "IL1B": 24.042165756225586,
+      "JCHAIN": -0.40541720390319824,
+      "CCL5": -9.788302421569824
+    }
+  },
+  "train_sig": {
+    "CD8-positive, alpha-beta T cell": {
+      "FTL": false,
+      "TPSAB1": false,
+      "CCL5": true,
+      "HLA-DPB1": false
+    },
+    "CD4-positive helper T cell": {
+      "JCHAIN": false,
+      "IL7R": true,
+      "CCL5": false,
+      "MS4A1": false
+    },
+    "B cell": {
+      "CCL5": false,
+      "MS4A1": true,
+      "IL7R": false,
+      "JCHAIN": true
+    },
+    "plasma cell": {
+      "MS4A1": false,
+      "HLA-DPB1": true,
+      "JCHAIN": true,
+      "TPSAB1": false
+    },
+    "mast cell": {
+      "MS4A1": false,
+      "CCL5": false,
+      "JCHAIN": false,
+      "TPSAB1": true
+    },
+    "dendritic cell": {
+      "HLA-DPB1": true,
+      "IL1B": true,
+      "TPSAB1": false,
+      "CCL5": false
+    },
+    "macrophage": {
+      "IL7R": false,
+      "HLA-DPB1": true,
+      "CCL5": false,
+      "FTL": true
+    },
+    "neutrophil": {
+      "MS4A1": false,
+      "IL1B": true,
+      "JCHAIN": false,
+      "CCL5": false
+    }
+  },
+  "val_topk": {
+    "CD8-positive, alpha-beta T cell": [
+      "CCL5",
+      "GZMA",
+      "NKG7",
+      "CCL4",
+      "GZMK",
+      "CST7",
+      "CD3D",
+      "IL32",
+      "B2M",
+      "HLA-A",
+      "HCST",
+      "CXCR4",
+      "DUSP2",
+      "HLA-B",
+      "MALAT1",
+      "CD8A",
+      "HLA-C",
+      "PTPRC",
+      "TRAC",
+      "KLRK1",
+      "CD2",
+      "GZMH",
+      "CTSW",
+      "CD52",
+      "BTG1"
+    ],
+    "CD4-positive helper T cell": [
+      "TRAC",
+      "IL32",
+      "CD3D",
+      "LTB",
+      "CD2",
+      "IL7R",
+      "B2M",
+      "CD52",
+      "TRBC2",
+      "MALAT1",
+      "RPS27",
+      "RPL13",
+      "TSC22D3",
+      "KLRB1",
+      "BTG1",
+      "RPL13A",
+      "CXCR4",
+      "RPS15A",
+      "RPS3",
+      "PTPRC",
+      "RPS12",
+      "RPLP2",
+      "RPS18",
+      "RPS27A",
+      "RPL10"
+    ],
+    "B cell": [
+      "MS4A1",
+      "HLA-DRA",
+      "CD74",
+      "CD79A",
+      "HLA-DRB1",
+      "HLA-DPA1",
+      "HLA-DPB1",
+      "BANK1",
+      "HLA-DQA1",
+      "HLA-DQB1",
+      "CD37",
+      "RPS23",
+      "RPS8",
+      "RPL18A",
+      "TNFRSF13C",
+      "RPS11",
+      "RPS5",
+      "CD79B",
+      "RPL8",
+      "RPL13",
+      "RPL30",
+      "KLF2",
+      "RPL18",
+      "BTG1",
+      "RPS18"
+    ],
+    "plasma cell": [
+      "IGKC",
+      "MZB1",
+      "IGHG1",
+      "SSR4",
+      "IGHG3",
+      "DERL3",
+      "IGLC2",
+      "IGLC3",
+      "IGHG4",
+      "FKBP11",
+      "PRDX4",
+      "SEC11C",
+      "IFI27",
+      "XBP1",
+      "IGHG2",
+      "IGHGP",
+      "JCHAIN",
+      "IGFBP7",
+      "SPARCL1",
+      "CD79A",
+      "ADIRF",
+      "GNG11",
+      "TXNDC5",
+      "IGLC1",
+      "IFITM3"
+    ],
+    "mast cell": [
+      "TPSAB1",
+      "TPSB2",
+      "CPA3",
+      "HPGDS",
+      "LTC4S",
+      "CD63",
+      "CLU",
+      "MS4A2",
+      "FTH1",
+      "CD9",
+      "HPGD",
+      "FCER1G",
+      "S100A6",
+      "LAPTM4A",
+      "RGS13",
+      "ANXA1",
+      "GATA2",
+      "PTMA",
+      "SLC18A2",
+      "CAPG",
+      "VWA5A",
+      "H3-3B",
+      "FTL",
+      "SAMSN1",
+      "VIM"
+    ],
+    "dendritic cell": [
+      "HLA-DPB1",
+      "HLA-DRA",
+      "CD74",
+      "HLA-DPA1",
+      "HLA-DQB1",
+      "HLA-DQA1",
+      "CST3",
+      "LYZ",
+      "HLA-DRB1",
+      "HLA-DMA",
+      "ACTB",
+      "IFI30",
+      "AIF1",
+      "LST1",
+      "TYROBP",
+      "HLA-DMB",
+      "TMSB10",
+      "SPI1",
+      "CPVL",
+      "LGALS2",
+      "S100A10",
+      "GRN",
+      "TYMP",
+      "GSN",
+      "ANXA2"
+    ],
+    "macrophage": [
+      "HLA-DRA",
+      "CST3",
+      "AIF1",
+      "CD74",
+      "HLA-DRB1",
+      "LYZ",
+      "FTL",
+      "HLA-DPA1",
+      "HLA-DPB1",
+      "HLA-DQA1",
+      "PSAP",
+      "TYROBP",
+      "HLA-DQB1",
+      "NPC2",
+      "FTH1",
+      "C1QA",
+      "HLA-DMA",
+      "IFI30",
+      "SAT1",
+      "C1QB",
+      "C1QC",
+      "GRN",
+      "FCER1G",
+      "CD14",
+      "CTSS"
+    ],
+    "neutrophil": [
+      "AIF1",
+      "FTL",
+      "FTH1",
+      "LYZ",
+      "SOD2",
+      "S100A9",
+      "TYROBP",
+      "LST1",
+      "IL1B",
+      "IFI30",
+      "NAMPT",
+      "S100A8",
+      "S100A11",
+      "SAT1",
+      "CTSS",
+      "CST3",
+      "HLA-DRA",
+      "SERPINA1",
+      "ACTB",
+      "FCN1",
+      "CXCL8",
+      "PLAUR",
+      "MNDA",
+      "FCER1G",
+      "PSAP"
+    ]
+  },
+  "val_rank": {
+    "CD8-positive, alpha-beta T cell": 0,
+    "CD4-positive helper T cell": 5,
+    "B cell": 0,
+    "plasma cell": 16,
+    "mast cell": 0,
+    "dendritic cell": 0,
+    "macrophage": 6,
+    "neutrophil": 8
+  },
+  "val_replicated": {
+    "CD8-positive, alpha-beta T cell": true,
+    "CD4-positive helper T cell": true,
+    "B cell": true,
+    "plasma cell": true,
+    "mast cell": true,
+    "dendritic cell": true,
+    "macrophage": true,
+    "neutrophil": true
+  },
+  "n_train": {
+    "CD8-positive, alpha-beta T cell": 4270,
+    "CD4-positive helper T cell": 3933,
+    "B cell": 1485,
+    "plasma cell": 281,
+    "mast cell": 1890,
+    "dendritic cell": 934,
+    "macrophage": 983,
+    "neutrophil": 260
+  },
+  "n_val": {
+    "CD8-positive, alpha-beta T cell": 3023,
+    "CD4-positive helper T cell": 4619,
+    "B cell": 1334,
+    "plasma cell": 2369,
+    "mast cell": 1828,
+    "dendritic cell": 604,
+    "macrophage": 1018,
+    "neutrophil": 433
+  }
+}

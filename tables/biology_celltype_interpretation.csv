@@ -1,0 +1,12 @@
+cell_type,abundance_main,abundance_ext,n_up_DEG,dominant_program,top_up_genes
+Fibroblast,down,down,1249,ECM / collagen remodeling,"CALD1,PRRX1,COL5A2,COL6A3,COL3A1"
+NK cell,down,up,214,Antigen presentation (MHC-II),"IGKC,FDCSP,VIM,RPS28P7,JUND"
+Dendritic cell,up,down,184,Complement / neutrophil / innate,"HLA-DRB6,HLA-DQA2,ANXA2,VIM,S100A10"
+Plasma cell,up,up,99,Endothelial activation / adhesion,"HLA-B,MALAT1,MT-CO2,MT-ATP6,SNORD3A"
+Endothelial,up,down,90,ECM / collagen remodeling,"COL4A1,SELE,NAP1L1,COL15A1,MT-CO1"
+T cell (CD8),down,up,80,Humoral / Ig (plasma B),"IGKC,CD74,RGS1,DUSP4,VIM"
+T cell (CD4),down,up,46,Humoral / Ig (plasma B),"IGKC,FDCSP,RGS1,KLF6,UCP2"
+Neutrophil,up,up,42,Complement / neutrophil / innate,"CD55,BASP1,S100A11,FTH1P20,SLC2A3"
+Mast cell,up,down,33,Humoral / Ig (plasma B),"CLU,S100A11,CD44,CST3,CD52"
+B cell,down,up,10,Antigen presentation (MHC-II),"RPL37A,ACTG1,HLA-DQA2,KLF6,ARL6IP5"
+Epithelial,up,down,1,-,TNFSF10

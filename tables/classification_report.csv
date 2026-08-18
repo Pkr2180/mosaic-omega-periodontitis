@@ -1,0 +1,10 @@
+cell_type,precision,recall,f1,support
+CD8_T,1.000,1.000,1.000,25
+CD4_T,1.000,1.000,1.000,25
+B_cell,1.000,0.760,0.864,25
+plasma_cell,1.000,1.000,1.000,25
+mast_cell,0.958,0.920,0.939,25
+dendritic_cell,0.758,1.000,0.862,25
+macrophage,0.759,0.880,0.815,25
+neutrophil,0.950,0.760,0.844,25
+ACCURACY(CV),,,0.915,200

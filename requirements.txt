@@ -1,0 +1,15 @@
+# Core mosaic_omega package: pure standard library, no dependencies.
+# The single-cell analysis scripts in analysis/ require:
+numpy
+pandas
+scipy
+scikit-learn
+scanpy
+anndata
+leidenalg
+igraph
+umap-learn
+matplotlib
+networkx
+h5py
+requests

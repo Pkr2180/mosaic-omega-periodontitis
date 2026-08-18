@@ -1,0 +1,14 @@
+metric,value
+cv_accuracy_mean,0.9150
+cv_accuracy_std,0.0768
+cross_study_accuracy_mean,0.9500
+cross_study_accuracy_std,0.0612
+macro_precision,0.9281
+macro_recall,0.9150
+macro_f1,0.9155
+confusion_accuracy,0.9150
+verify_brier,0.1576
+verify_ece,0.0548
+verify_auroc,0.5789
+n_runs,25
+n_conf_pairs,1277
