@@ -5,6 +5,7 @@ These are deliberately separate from the architecture suite
 
 Run:  python tests/test_reproducibility.py
 """
+import csv
 import os
 import re
 import sys
@@ -119,6 +120,87 @@ def test_reference_doc_matches_source():
         "docs/MOSAIC_OMEGA.md has drifted from the source (see names above); "
         "run: python analysis/sync_reference_doc.py"
     )
+
+
+def _scalars(path):
+    """Minimal YAML scalar reader -- the guards must run with no dependencies."""
+    out = {}
+    for line in path.read_text(encoding="utf-8").splitlines():
+        m = re.match(r"^\s{2,}([a-z_]+):\s*([^#\n]+?)\s*(?:#.*)?$", line)
+        if m and m.group(2) not in ("", "|", ">-"):
+            out[m.group(1)] = m.group(2).strip().strip('"')
+    return out
+
+
+def test_frozen_config_matches_results():
+    """configs/ijos_reproduction.yaml must match the committed tables and scripts."""
+    cfg = _scalars(ROOT / "configs" / "ijos_reproduction.yaml")
+    problems = []
+
+    def eq(key, actual, label):
+        want = cfg.get(key)
+        if want is None:
+            problems.append(f"{key}: missing from config")
+        elif str(want) != str(actual):
+            problems.append(f"{key}: config says {want}, {label} says {actual}")
+
+    # headline DEG counts, straight from the results table
+    sc_total = pb_total = 0
+    with open(ROOT / "tables" / "overfitting_comparison.csv", newline="") as fh:
+        for row in csv.DictReader(fh):
+            sc_total += int(row["singlecell_DEG"])
+            pb_total += int(row["pseudobulk_perm_DEG"])
+    eq("single_cell_degs", sc_total, "tables/overfitting_comparison.csv")
+    eq("pseudobulk_degs", pb_total, "tables/overfitting_comparison.csv")
+
+    # program test
+    with open(ROOT / "tables" / "corrected_program_test.csv", newline="") as fh:
+        rows = list(csv.DictReader(fh))
+    eq("programs_tested", len(rows), "tables/corrected_program_test.csv")
+    eq("programs_significant_both_cohorts",
+       sum(r["sig_both"].strip().lower() == "true" for r in rows),
+       "tables/corrected_program_test.csv")
+
+    # architecture self-assessment
+    gaps = {}
+    with open(ROOT / "tables" / "ai_disease_full_metrics.csv", newline="") as fh:
+        for row in csv.DictReader(fh):
+            if row["metric"] == "score_truth_gap":
+                gaps[row["cohort"]] = round(float(row["value"]), 3)
+    eq("score_truth_gap_main", gaps.get("main"), "tables/ai_disease_full_metrics.csv")
+    eq("score_truth_gap_external", gaps.get("ext"), "tables/ai_disease_full_metrics.csv")
+
+    # QC / clustering parameters, straight from the scripts
+    build = (ROOT / "analysis" / "disease_01_build.py").read_text(encoding="utf-8")
+    eq("min_genes_per_cell", 200 if ">= 200" in build else "?", "disease_01_build.py")
+    eq("max_genes_per_cell", 6000 if "<= 6000" in build else "?", "disease_01_build.py")
+    eq("max_pct_mitochondrial", 20 if "pct_counts_mt\"] < 20" in build else "?",
+       "disease_01_build.py")
+
+    ann = (ROOT / "analysis" / "disease_02_annotate.py").read_text(encoding="utf-8")
+    eq("resolution", 1.0 if "resolution=1.0" in ann else "?", "disease_02_annotate.py")
+    eq("n_neighbors", 15 if "n_neighbors=15" in ann else "?", "disease_02_annotate.py")
+    eq("n_pcs", 30 if "n_pcs=30" in ann else "?", "disease_02_annotate.py")
+
+    de = (ROOT / "analysis" / "disease_03_analysis.py").read_text(encoding="utf-8")
+    eq("min_cells_per_type",
+       re.search(r"MIN_CELLS\s*=\s*(\d+)", de).group(1), "disease_03_analysis.py")
+
+    assert not problems, (
+        "configs/ijos_reproduction.yaml has drifted from the results/scripts:\n  "
+        + "\n  ".join(problems)
+    )
+
+
+def test_reproduce_entrypoint_stages_exist():
+    """Every stage reproduce.py would run must point at a real script."""
+    sys.path.insert(0, str(ROOT))
+    import reproduce
+
+    missing = [f"[{s.key}] {s.script}" for s in reproduce.STAGES if not s.path.exists()]
+    assert not missing, "reproduce.py references missing scripts:\n  " + "\n  ".join(missing)
+    keys = [s.key for s in reproduce.STAGES]
+    assert len(keys) == len(set(keys)), f"duplicate stage keys: {keys}"
 
 
 def test_package_is_importable_without_dependencies():

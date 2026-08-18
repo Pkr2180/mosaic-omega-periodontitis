@@ -1,0 +1,63 @@
+# ---------------------------------------------------------------------------
+# VERIFY BEFORE THE MANUSCRIPT IS SUBMITTED:
+#   * given-names / family-names below are inferred, not confirmed. Correct the
+#     split if your publication name differs.
+#   * add `orcid: "https://orcid.org/0000-0000-0000-0000"` under the author.
+#   * add co-authors in manuscript order.
+#   * after the Zenodo release, set `doi:` to the version DOI and uncomment the
+#     preferred-citation block.
+# ---------------------------------------------------------------------------
+cff-version: 1.2.0
+message: "If you use this software or its results, please cite it as below."
+title: "MOSAIC-Ω: self-auditing agentic analysis exposes pseudoreplication in single-cell periodontitis"
+abstract: >-
+  A self-reconfiguring multi-agent architecture that governs analytic agents through
+  a single convex Free-Energy Structural Control objective and carries an explicit
+  self-assessment layer (adversarial falsification, blinded adjudication, and an
+  overconfidence detector). Applied to two independent human gingival single-cell
+  cohorts, it shows that only plasma-cell compositional remodelling replicates,
+  while cell-level gene signatures are dominated by pseudoreplication — single-cell
+  Wilcoxon testing calls 2,897 differentially expressed genes where a donor-level
+  pseudobulk permutation test calls none.
+type: software
+authors:
+  - given-names: Pradeep
+    family-names: Kumar
+    email: dr.pradeepperio@outlook.com
+    affiliation: "Saveetha Dental College and Hospitals, Saveetha Institute of Medical and Technical Sciences"
+repository-code: "https://github.com/Pkr2180/mosaic-omega-periodontitis"
+license: MIT
+version: 1.0.0
+keywords:
+  - single-cell RNA sequencing
+  - periodontitis
+  - multi-agent systems
+  - pseudoreplication
+  - reproducibility
+  - free-energy principle
+
+# Datasets analysed (not produced by this work).
+references:
+  - type: data
+    title: "Single-cell RNA sequencing of human periodontal tissue (main cohort)"
+    authors:
+      - name: "NCBI Gene Expression Omnibus"
+    url: "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE171213"
+    notes: "GSE171213 — 12 donors."
+  - type: data
+    title: "Single-cell atlas of human gingiva in health and periodontitis (external cohort)"
+    authors:
+      - name: "NCBI Gene Expression Omnibus"
+    url: "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE164241"
+    notes: "GSE164241 — Moutsopoulos laboratory, NIH."
+
+# Uncomment and complete once the manuscript is accepted.
+# preferred-citation:
+#   type: article
+#   title: "Self-auditing agentic analysis exposes pseudoreplication in single-cell periodontitis"
+#   authors:
+#     - given-names: Pradeep
+#       family-names: Kumar
+#   journal: "International Journal of Oral Science"
+#   year: 2026
+#   doi: "10.0000/000000"

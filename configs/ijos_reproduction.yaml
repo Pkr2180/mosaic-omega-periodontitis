@@ -1,0 +1,64 @@
+# Frozen parameters for the manuscript results.
+#
+# This file is documentation of record, not a control surface: the values below are
+# transcribed from the analysis scripts, which remain the executable source of truth.
+# tests/test_reproducibility.py checks that the values here still match the scripts,
+# so the two cannot drift apart silently.
+
+manuscript:
+  title: "Self-auditing agentic analysis exposes pseudoreplication in single-cell periodontitis"
+  target_journal: "International Journal of Oral Science"
+  repository: "https://github.com/Pkr2180/mosaic-omega-periodontitis"
+
+environment:
+  python: "3.12.10"
+  platform: "Windows 11"
+  pinned: "requirements.txt / environment.yml"
+
+cohorts:
+  main:
+    accession: GSE171213
+    donors: 12          # 4 healthy, 5 periodontitis, 3 treated
+    cells_after_qc: 35323
+    genes: 28339
+  external:
+    accession: GSE164241
+    samples: 18         # 13 healthy gingiva, 5 periodontitis
+    cells_after_qc: 94301
+
+quality_control:                     # analysis/disease_01_build.py
+  min_genes_per_cell: 200
+  max_genes_per_cell: 6000
+  max_pct_mitochondrial: 20
+
+clustering:                          # analysis/disease_02_annotate.py
+  method: leiden
+  resolution: 1.0
+  n_neighbors: 15
+  n_pcs: 30
+  clusters_main: 29
+  cell_types: 11
+
+differential_expression:
+  min_cells_per_type: 40             # analysis/disease_03_analysis.py
+  single_cell_test: wilcoxon         # SUPERSEDED -- pseudoreplicated
+  corrected_test: pseudobulk_exact_permutation
+  fdr_threshold: 0.05
+
+headline_results:
+  single_cell_degs: 2897             # tables/overfitting_comparison.csv
+  pseudobulk_degs: 0
+  inflation_factor: "~2900x"
+  programs_significant_both_cohorts: 0
+  programs_tested: 7
+  score_truth_gap_main: 0.103        # tables/ai_disease_full_metrics.csv
+  score_truth_gap_external: 0.342
+
+surviving_claims:
+  - "Plasma-cell expansion replicates in both cohorts (external FDR 0.041)"
+  - "Fibroblast relative contraction replicates in both cohorts"
+
+retracted_claims:
+  - "2,897 single-cell DEGs (pseudoreplication)"
+  - "MOSAIC 3/3 biomarkers replicate (circular oracle; fails blind test)"
+  - "4 functional programs replicate (0/7 by correctly powered test)"

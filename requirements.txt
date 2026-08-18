@@ -1,15 +1,28 @@
-# Core mosaic_omega package: pure standard library, no dependencies.
-# The single-cell analysis scripts in analysis/ require:
-numpy
-pandas
-scipy
-scikit-learn
-scanpy
-anndata
-leidenalg
-igraph
-umap-learn
-matplotlib
-networkx
-h5py
-requests
+# Dependencies of the analysis/ single-cell pipeline.
+#
+# The core mosaic_omega package needs NONE of these -- it is standard-library
+# only, which is why the architecture suite and CLI run on a bare interpreter.
+#
+# Versions are pinned to the environment the manuscript results were produced in
+# (Python 3.12.10, Windows 11). See environment.yml for a conda specification.
+
+numpy==2.2.5
+pandas==2.3.1
+scipy==1.15.2
+scikit-learn==1.8.0
+scanpy==1.11.4
+anndata==0.12.1
+umap-learn==0.5.9.post2
+matplotlib==3.10.1
+networkx==3.4.2
+h5py==3.14.0
+requests==2.32.4
+
+# Graph clustering backend for scanpy's Leiden step (analysis/disease_02_annotate.py,
+# analysis/disease_ext_01_build.py). These were installed in the environment used to
+# build the annotated .h5ad files but are no longer present in it, so the exact
+# versions could not be recovered; they are left as floors rather than invented pins.
+# The committed figures/ and tables/ do not depend on them -- they are needed only to
+# rebuild the annotations from raw counts.
+leidenalg>=0.10
+igraph>=0.11

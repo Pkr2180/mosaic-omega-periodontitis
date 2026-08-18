@@ -1,0 +1,37 @@
+# Conda specification for the analysis/ single-cell pipeline.
+#
+#   conda env create -f environment.yml
+#   conda activate mosaic-omega
+#   pip install -e .
+#
+# The core mosaic_omega package needs none of this -- a bare Python >= 3.9
+# interpreter runs the architecture suite, the reproducibility guards and the CLI.
+#
+# leidenalg and igraph come from conda-forge here because the pip wheels need a
+# C toolchain on some platforms. Their versions are floors, not pins: they were
+# present in the environment that built the annotated .h5ad files but are no
+# longer installed there, so the exact versions could not be recovered.
+
+name: mosaic-omega
+
+channels:
+  - conda-forge
+  - bioconda
+
+dependencies:
+  - python=3.12.10
+  - numpy=2.2.5
+  - pandas=2.3.1
+  - scipy=1.15.2
+  - scikit-learn=1.8.0
+  - matplotlib-base=3.10.1
+  - networkx=3.4.2
+  - h5py=3.14.0
+  - requests=2.32.4
+  - leidenalg>=0.10
+  - python-igraph>=0.11
+  - pip
+  - pip:
+      - scanpy==1.11.4
+      - anndata==0.12.1
+      - umap-learn==0.5.9.post2
