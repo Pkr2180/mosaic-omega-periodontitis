@@ -29,7 +29,7 @@ from mosaic_omega import (
 from mosaic_omega.types import Phase, Termination, RunTrace, Candidate
 from run_periodontal_real import PeriodontalMarkerProblem, TASK_PATH
 
-ROOT = os.path.dirname(__file__)
+from _paths import ROOT, DATA, TAB, FIG  # repo-relative; override with MOSAIC_ROOT
 FIGDIR = os.path.join(ROOT, "figures")
 os.makedirs(FIGDIR, exist_ok=True)
 

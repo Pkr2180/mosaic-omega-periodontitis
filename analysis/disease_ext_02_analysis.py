@@ -12,8 +12,7 @@ from disease_03_analysis import bh, pseudobulk_logcpm, loso_robustness
 from disease_05_mosaic import DiseaseBiomarkerProblem
 from mosaic_omega import MosaicConfig, MosaicOmega
 
-DATA = r"C:\Users\Pradeep Kumar\Downloads\latest architecture -1\data"
-TAB = r"C:\Users\Pradeep Kumar\Downloads\latest architecture -1\tables"
+from _paths import ROOT, DATA, TAB, FIG  # repo-relative; override with MOSAIC_ROOT
 A_PATH = os.path.join(DATA, "GSE164241_annotated.h5ad")
 MIN_CELLS = 40
 

@@ -28,9 +28,7 @@ from mosaic_omega.metrics import brier_score, expected_calibration_error, auroc
 from run_periodontal_real import PeriodontalMarkerProblem
 
 warnings.filterwarnings("ignore")
-ROOT = os.path.dirname(__file__)
-FIG = os.path.join(ROOT, "figures"); os.makedirs(FIG, exist_ok=True)
-TAB = os.path.join(ROOT, "tables"); os.makedirs(TAB, exist_ok=True)
+from _paths import ROOT, DATA, TAB, FIG  # repo-relative; override with MOSAIC_ROOT
 
 SHARED = ["CD8-positive, alpha-beta T cell","CD4-positive helper T cell","B cell",
           "plasma cell","mast cell","dendritic cell","macrophage","neutrophil"]

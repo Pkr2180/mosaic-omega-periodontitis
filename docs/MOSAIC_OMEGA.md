@@ -2,7 +2,7 @@
 
 *A self-reconfiguring agentic architecture with fail-safe loop engineering.*
 
-Python ≥ 3.9 · zero third-party dependencies · 23/23 tests passing · bit-for-bit deterministic · every number in this document produced by running the code.
+Python ≥ 3.9 · zero third-party dependencies · 24/24 tests passing · bit-for-bit deterministic · every number in this document produced by running the code.
 
 ---
 
@@ -30,7 +30,7 @@ mosaic-omega/
 
 ```bash
 python run_demo.py                  # single run + 9-group metric report + ablations
-python tests/test_mosaic_omega.py   # 23 tests, no pytest needed
+python tests/test_mosaic_omega.py   # 24 tests, no pytest needed
 python -m mosaic_omega.cli --report
 ```
 
@@ -632,7 +632,7 @@ problem instances are identical; only the blinding channel differs.
 
 ### 5.5 Test suite
 
-`23/23 passed` on this source, no pytest required. Coverage: mission kernel compilation;
+`24/24 passed` on this source, no pytest required. Coverage: mission kernel compilation;
 provisioning gap-cover and reuse; micro-agent TTL; all four pruning paths
 including protected roles; sovereignty hysteresis; topology rewire and cycle
 break; routing oracle match; blinding redaction and leak audit; all five
@@ -5612,7 +5612,7 @@ Empty — makes `tests` a package.
 
 ### `tests/test_mosaic_omega.py`
 
-23 tests with a standalone runner; pytest optional.
+24 tests with a standalone runner; pytest optional.
 
 ```python
 """Test suite: one or more tests per architectural component."""

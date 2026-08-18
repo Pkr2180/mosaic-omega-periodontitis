@@ -11,8 +11,7 @@ import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 warnings.filterwarnings("ignore")
 
-ROOT = r"C:\Users\Pradeep Kumar\Downloads\latest architecture -1"
-TAB, FIG = ROOT+r"\tables", ROOT+r"\figures"
+from _paths import ROOT, DATA, TAB, FIG  # repo-relative; override with MOSAIC_ROOT
 
 PROGRAMS = {
     "Humoral / Ig (plasma B)": ["IGKC","IGHG1","IGHG2","IGHG3","IGHG4","IGHA1","IGHA2","IGHM",

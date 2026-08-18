@@ -8,7 +8,7 @@ import scanpy as sc
 warnings.filterwarnings("ignore")
 sc.settings.verbosity = 1
 
-DATA = r"C:\Users\Pradeep Kumar\Downloads\latest architecture -1\data"
+from _paths import ROOT, DATA, TAB, FIG  # repo-relative; override with MOSAIC_ROOT
 QC = os.path.join(DATA, "GSE171213_qc.h5ad")
 OUT = os.path.join(DATA, "GSE171213_annotated.h5ad")
 

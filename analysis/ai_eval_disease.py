@@ -16,8 +16,7 @@ warnings.filterwarnings("ignore")
 from mosaic_omega import MosaicConfig, MosaicOmega
 from disease_05_mosaic import DiseaseBiomarkerProblem
 
-ROOT = r"C:\Users\Pradeep Kumar\Downloads\latest architecture -1"
-TAB, FIG = ROOT+r"\tables", ROOT+r"\figures"
+from _paths import ROOT, DATA, TAB, FIG  # repo-relative; override with MOSAIC_ROOT
 
 ABLATIONS = {
     "full": {},

@@ -10,7 +10,7 @@ from scipy import stats
 from sklearn.metrics import roc_auc_score
 warnings.filterwarnings("ignore")
 
-TAB = r"C:\Users\Pradeep Kumar\Downloads\latest architecture -1\tables"
+from _paths import ROOT, DATA, TAB, FIG  # repo-relative; override with MOSAIC_ROOT
 
 
 def de_path(prefix, ct):

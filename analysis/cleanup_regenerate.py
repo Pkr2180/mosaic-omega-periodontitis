@@ -10,8 +10,7 @@ import matplotlib.pyplot as plt
 from scipy import stats
 warnings.filterwarnings("ignore")
 
-ROOT = r"C:\Users\Pradeep Kumar\Downloads\latest architecture -1"
-DATA, TAB, FIG = ROOT+r"\data", ROOT+r"\tables", ROOT+r"\figures"
+from _paths import ROOT, DATA, TAB, FIG  # repo-relative; override with MOSAIC_ROOT
 COND = {"Healthy": "#2563eb", "Periodontitis": "#dc2626", "Periodontitis_treated": "#f59e0b"}
 
 

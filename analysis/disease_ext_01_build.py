@@ -9,7 +9,7 @@ import numpy as np, pandas as pd, scipy.io, scipy.sparse as sp
 import scanpy as sc
 warnings.filterwarnings("ignore")
 
-DATA = r"C:\Users\Pradeep Kumar\Downloads\latest architecture -1\data"
+from _paths import ROOT, DATA, TAB, FIG  # repo-relative; override with MOSAIC_ROOT
 EXT = os.path.join(DATA, "GSE164241")
 OUT = os.path.join(DATA, "GSE164241_annotated.h5ad")
 

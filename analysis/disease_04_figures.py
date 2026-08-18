@@ -6,8 +6,7 @@ import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 warnings.filterwarnings("ignore")
 
-ROOT = r"C:\Users\Pradeep Kumar\Downloads\latest architecture -1"
-DATA, TAB, FIG = ROOT+r"\data", ROOT+r"\tables", ROOT+r"\figures"
+from _paths import ROOT, DATA, TAB, FIG  # repo-relative; override with MOSAIC_ROOT
 A = sc.read_h5ad(os.path.join(DATA, "GSE171213_annotated.h5ad"))
 COND = {"Healthy": "#2563eb", "Periodontitis": "#dc2626", "Periodontitis_treated": "#f59e0b"}
 

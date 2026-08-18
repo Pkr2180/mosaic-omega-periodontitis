@@ -10,7 +10,7 @@ import json, os
 import numpy as np
 import scanpy as sc
 
-DATA = r"C:\Users\Pradeep Kumar\Downloads\latest architecture -1\data"
+from _paths import ROOT, DATA, TAB, FIG  # repo-relative; override with MOSAIC_ROOT
 PRIMARY = os.path.join(DATA, "mucosal_immune.h5ad")     # 23k, gingiva+immune (train/truth)
 VALID   = os.path.join(DATA, "mucosal.h5ad")            # 87k, gingiva (external validation)
 OUT     = os.path.join(DATA, "perio_task.json")

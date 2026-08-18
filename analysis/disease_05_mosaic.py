@@ -19,7 +19,7 @@ from mosaic_omega.problem import Problem, _Constraint
 from mosaic_omega.rng import rng_for
 from mosaic_omega.types import RiskLevel, StageSpec
 
-ROOT = r"C:\Users\Pradeep Kumar\Downloads\latest architecture -1"
+from _paths import ROOT, DATA, TAB, FIG  # repo-relative; override with MOSAIC_ROOT
 CAND = os.path.join(ROOT, "tables", "disease_candidates.json")
 
 LINEAGE = {

@@ -12,9 +12,7 @@ from scipy import stats
 import scanpy as sc
 warnings.filterwarnings("ignore")
 
-DATA = r"C:\Users\Pradeep Kumar\Downloads\latest architecture -1\data"
-TAB = r"C:\Users\Pradeep Kumar\Downloads\latest architecture -1\tables"
-os.makedirs(TAB, exist_ok=True)
+from _paths import ROOT, DATA, TAB, FIG  # repo-relative; override with MOSAIC_ROOT
 A_PATH = os.path.join(DATA, "GSE171213_annotated.h5ad")
 MIN_CELLS = 40
 

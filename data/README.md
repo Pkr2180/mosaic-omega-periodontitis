@@ -3,8 +3,8 @@
 The raw and processed single-cell files are **not stored in this repository**
 (they are several gigabytes and exceed GitHub file limits). They are all public
 and can be re-downloaded from the original repositories. Analysis outputs
-(`../figures`, `../tables`) and the manuscript (`../manuscript`) are included, so
-the results can be inspected without re-downloading.
+(`../figures`, `../tables`) are included, so the results can be inspected without
+re-downloading. The manuscript files are intentionally not part of this repository.
 
 ## Datasets used
 
@@ -33,6 +33,12 @@ python analysis/disease_04_figures.py
 The download URLs are embedded in the build scripts. `perio_task.json`
 (the marker-control task spec) is small and kept in this folder.
 
-> Note: the analysis scripts currently use absolute paths set for the original
-> machine. Update the `ROOT`/`DATA` variables at the top of each script to your
-> local clone path before re-running.
+> **No editing required.** Every script resolves its paths from the repository root
+> via `analysis/_paths.py` (`ROOT = Path(__file__).resolve().parents[1]`), so the
+> pipeline runs on any machine, username, or OS straight after `git clone`.
+> To keep this `data/` directory on a different disk, point `MOSAIC_ROOT` at a
+> directory laid out like the repository:
+>
+> ```bash
+> export MOSAIC_ROOT=/scratch/mosaic-omega    # Windows: set MOSAIC_ROOT=D:\mosaic-omega
+> ```

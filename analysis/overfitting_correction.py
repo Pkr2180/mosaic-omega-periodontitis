@@ -19,8 +19,7 @@ warnings.filterwarnings("ignore")
 from mosaic_omega import MosaicConfig, MosaicOmega
 from disease_05_mosaic import DiseaseBiomarkerProblem
 
-ROOT = r"C:\Users\Pradeep Kumar\Downloads\latest architecture -1"
-DATA, TAB, FIG = ROOT+r"\data", ROOT+r"\tables", ROOT+r"\figures"
+from _paths import ROOT, DATA, TAB, FIG  # repo-relative; override with MOSAIC_ROOT
 MAIN = os.path.join(DATA, "GSE171213_annotated.h5ad")
 EXT = os.path.join(DATA, "GSE164241_annotated.h5ad")
 MIN_CELLS, MIN_SAMP, MAX_EXACT, N_RAND = 10, 3, 400, 1000

@@ -16,8 +16,7 @@ import matplotlib.pyplot as plt
 warnings.filterwarnings("ignore")
 
 from biology_functional import PROGRAMS
-ROOT = r"C:\Users\Pradeep Kumar\Downloads\latest architecture -1"
-DATA, TAB, FIG = ROOT+r"\data", ROOT+r"\tables", ROOT+r"\figures"
+from _paths import ROOT, DATA, TAB, FIG  # repo-relative; override with MOSAIC_ROOT
 
 
 def bh(p):

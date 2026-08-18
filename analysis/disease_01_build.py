@@ -7,7 +7,7 @@ import os, gzip
 import numpy as np, pandas as pd, scipy.sparse as sp
 import scanpy as sc
 
-DATA = r"C:\Users\Pradeep Kumar\Downloads\latest architecture -1\data"
+from _paths import ROOT, DATA, TAB, FIG  # repo-relative; override with MOSAIC_ROOT
 COUNTS = os.path.join(DATA, "GSE171213_counts.tsv.gz")
 OUT = os.path.join(DATA, "GSE171213.h5ad")
 
